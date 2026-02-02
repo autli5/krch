@@ -41,28 +41,10 @@ public class KrchApplication {
         return link.getShortCode();
    }
 
-    String getUrl(String shortCode){
+    public String getUrl(String shortCode){
         return repo.findByShortCode(shortCode)
                 .map(ShortUrl::getOriginalUrl)
                 .orElse(null);
-    }
-
-    @RestController
-    public class RedirectController {
-
-        public RedirectController(LinkRepository repo) {
-        }
-//
-//        @GetMapping("/{shortCode}")
-//        public ResponseEntity<?> redirect(@PathVariable String shortCode) {
-//            String original = getUrl(shortCode);
-//            if (original == null) {
-//                return ResponseEntity.notFound().build();
-//            }
-//            return ResponseEntity.status(302)
-//                    .header(HttpHeaders.LOCATION, original)
-//                    .build();
-//        }
     }
 
 
