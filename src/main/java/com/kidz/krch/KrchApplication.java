@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 public class KrchApplication {
-    private final LinkRepository repo;
+    //TODO : move logic to service
 
-    public KrchApplication(LinkRepository repo) {
-        this.repo = repo;
-    }
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(KrchApplication.class, args);
@@ -42,9 +40,7 @@ public class KrchApplication {
    }
 
     public String getUrl(String shortCode){
-        return repo.findByShortCode(shortCode)
-                .map(ShortUrl::getOriginalUrl)
-                .orElse(null);
+        
     }
 
 
