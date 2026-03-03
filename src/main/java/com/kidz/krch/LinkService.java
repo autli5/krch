@@ -12,16 +12,17 @@ public class LinkService {
         this.repo = repo;
     }
 
-    public String getUrl(String originalUrl) {
-//        return repo.findByShortCode(shortCode)
-//                .map(ShortUrl::getOriginalUrl)
-//                .orElse(null);
-
-        return "https://www.google.com";
+    public String getUrl(String shortCode) {
+        return repo.findByShortCode(shortCode)
+                .map(ShortUrl::getOriginalUrl)
+                .orElse(null);
     }
 
-    public int addUrl(String originalUrl) {
-        return 1;
+    public String addUrl(String originalUrl) {
+        String shortCode = generateShortCode();
+        ShortUrl shortUrl = new ShortUrl(originalUrl, shortCode);
+        repo.save(shortUrl);
+        return shortCode;
     }
 
     private static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789";
@@ -33,7 +34,5 @@ public class LinkService {
             sb.append(CHARS.charAt(RANDOM.nextInt(CHARS.length())));
         }
         return sb.toString();
-
-
-
     }
+}

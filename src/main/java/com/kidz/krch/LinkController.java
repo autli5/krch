@@ -1,6 +1,5 @@
 package com.kidz.krch;
 
-import com.kidz.krch.LinkService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +13,7 @@ public class LinkController {
     }
 
     @PostMapping
-    public int createShortLink(@RequestBody String originalUrl) {
+    public String createShortLink(@RequestBody String originalUrl) {
         return linkService.addUrl(originalUrl);
     }
 
